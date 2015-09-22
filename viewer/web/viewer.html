@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <!--
 Copyright 2012 Mozilla Foundation
 
@@ -23,7 +23,7 @@ http://sourceforge.net/adobe/cmap/wiki/License/
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="google" content="notranslate">
     <title>PDF.js viewer</title>
-
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">  
 
     <link rel="stylesheet" href="viewer.css"/>
 
@@ -33,6 +33,8 @@ http://sourceforge.net/adobe/cmap/wiki/License/
 
 <!-- This snippet is used in production (included from viewer.html) -->
 <link rel="resource" type="application/l10n" href="locale/locale.properties"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="l10n.js"></script>
 <script src="../build/pdf.js"></script>
 
@@ -411,10 +413,12 @@ http://sourceforge.net/adobe/cmap/wiki/License/
       <input type="button" value="Cancel" class="mozPrintCallback-cancel">
     </div>
   </div>
-</div>
-
+</div> 
   <script src="//hypothes.is/embed.js"></script>
-
+  <script src="/viewer/web/anchor-bundle.js"></script>
+  <script>
+    setTimeout(function(){load_extras()}, 2000)
+  </script>
   </body>
 </html>
 
