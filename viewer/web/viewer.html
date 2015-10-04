@@ -24,25 +24,19 @@ http://sourceforge.net/adobe/cmap/wiki/License/
     <meta name="google" content="notranslate">
     <title>PDF.js viewer</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">  
-
-    <link rel="stylesheet" href="viewer.css"/>
-
-    <script src="compatibility.js"></script>
-
-
-
-<!-- This snippet is used in production (included from viewer.html) -->
-<link rel="resource" type="application/l10n" href="locale/locale.properties"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="l10n.js"></script>
-<script src="../build/pdf.js"></script>
-
-
-
-    <script src="debugger.js"></script>
-    <script src="viewer.js"></script>
-
+    <link rel="stylesheet" href="css/viewer.css"/>
+    <link rel="stylesheet" href="css/fileinput.min.css"/>
+    <script src="js/compatibility.js"></script>
+    <!-- This snippet is used in production (included from viewer.html) -->
+    <link rel="resource" type="application/l10n" href="locale/locale.properties"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/l10n.js"></script>
+    <script src="../build/pdf.js"></script>
+    <script src="js/debugger.js"></script>
+    <script src="js/viewer.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="js/fileinput.min.js"></script>
   </head>
 
   <body tabindex="1" class="loadingInProgress">
@@ -415,7 +409,7 @@ http://sourceforge.net/adobe/cmap/wiki/License/
   </div>
 </div> 
   <script src="//hypothes.is/embed.js"></script>
-  <script src="/viewer/web/anchor-bundle.js"></script>
+  <script src="js/anchor-bundle.js"></script>
   <script>
     setTimeout(function(){load_extras()}, 2000)
   </script>

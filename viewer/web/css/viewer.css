@@ -2024,3 +2024,11 @@ Additional styles added by @bigfatnoob
   color: #bd1c2b;
   text-decoration: none;
 }
+
+.upload-icon:before {
+  content: url(images/toolbarButton-openFile.png);
+}
+
+.fa{
+  font-family: FontAwesome !important;
+}

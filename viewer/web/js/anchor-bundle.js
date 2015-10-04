@@ -22958,7 +22958,19 @@ function add_share() {
   li.append(share);
   ann_bar.find("ul").append(li);  
 }
-  
+
+function add_upload() {
+  var ann_bar = $(".annotator-toolbar");
+  var file_upload = $("<button/>")
+            .attr("title", "upload")
+            .attr("name", "show-upload")
+            .attr("data-toggle", "modal")
+            .attr("data-target", "#uploadModal")
+            .addClass("fa fa-cloud-upload");
+  var li = $("<li/>");
+  li.append(file_upload);
+  ann_bar.find("ul").append(li); 
+}
 
 function create_modal() {
   var legendModal = '\
@@ -23114,12 +23126,38 @@ function create_modal() {
     </div>\
   ';
   $('body').append(shareModal);
+  
+  var fileModal ='\
+    <div id="uploadModal" class="modal fade" role="dialog">\
+      <div class="modal-dialog">\
+        <!-- Modal content-->\
+        <div class="modal-content">\
+          <div class="modal-header">\
+            <button type="button" class="close" data-dismiss="modal">&times;</button>\
+            <h4 class="modal-title">Upload File</h4>\
+          </div>\
+          <div class="modal-body">\
+            <form id="fileForm" action="#" method="POST">\
+              <input type="file" id="file-select" name="photos[]" class="file" data-preview-file-type="text"/>\
+              <button type="submit" id="upload-button">Upload</button>\
+            </form>\
+          </div>\
+        </div>\
+      </div>\
+    </div>\
+  ';
+  $('body').append(fileModal);
+  $("#fileForm").submit(function(e){
+    alert("Hello World");
+    e.preventDefault()
+  });
 }
 
 function load_extras() {
   create_modal();
   add_legend();
   add_share();
+  add_upload();
 }
 
 window.get_annotations = get_annotations
