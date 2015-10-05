@@ -15,7 +15,7 @@ get_annotations();
 </script>
 */
 
-var $=require("jquery");
+
 function attach_annotation(tag, text, exact, prefix) {
 	var TextQuoteAnchor = require ('dom-anchor-text-quote')
 	var XPathRange = require('xpath-range')			       
@@ -27,7 +27,6 @@ function attach_annotation(tag, text, exact, prefix) {
 }
 
 function get_annotations() {
-	var $ = require('jQuery');
 	url = 'https://hypothes.is/api/search?uri=' + location.href;
 	$.ajax({
 		url: url,
@@ -99,7 +98,7 @@ function add_upload() {
   ann_bar.find("ul").append(li); 
 }
 
-function create_modal() {
+function getLegendModal() {
   var legendModal = '\
   <div id="legendModal" class="modal fade" role="dialog">\
     <div class="modal-dialog">\
@@ -224,6 +223,9 @@ function create_modal() {
     </div>\
   </div>';
   $('body').append(legendModal);
+}
+
+function getShareModal() {
   pageURL = window.location.href;
   twitterURL = "https://twitter.com/intent/tweet?url=" + pageURL;
   facebookURL = "https://www.facebook.com/sharer/sharer.php?u=" + pageURL;
@@ -253,7 +255,9 @@ function create_modal() {
     </div>\
   ';
   $('body').append(shareModal);
-  
+}
+
+function getFileModal() {
   var fileModal ='\
     <div id="uploadModal" class="modal fade" role="dialog">\
       <div class="modal-dialog">\
@@ -265,8 +269,19 @@ function create_modal() {
           </div>\
           <div class="modal-body">\
             <form id="fileForm" action="#" method="POST">\
-              <input type="file" id="file-select" name="photos[]" class="file" data-preview-file-type="text"/>\
-              <button type="submit" id="upload-button">Upload</button>\
+              <div class="form-group">\
+                <div class="input-group">\
+                  <span class="input-group-btn">\
+                    <span class="btn btn-primary btn-file">\
+                      Browse <input type="file" id="file-select" name="files[]" class="file"/>\
+                    </span>\
+                  </span>\
+                  <input type="text" id="fileName" class="form-control" readonly>\
+                </div>\
+              </div>\
+              <div class="form-group text-right">\
+                <button class="btn btn-primary" type="submit" id="upload-button">Upload</button>\
+              </div>\
             </form>\
           </div>\
         </div>\
@@ -274,10 +289,29 @@ function create_modal() {
     </div>\
   ';
   $('body').append(fileModal);
+  $(document).on('change', '#file-select', function(e) {
+    print(e);
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    var file_name = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+    $("#fileName").val(file_name);
+  });
   $("#fileForm").submit(function(e){
     alert("Hello World");
     e.preventDefault()
   });
+}
+
+function create_modal() {
+  // Legend Modal and its functions
+  getLegendModal()
+  
+  // Share Modal and its functions
+  getShareModal();
+  
+  // File Modal and its functions
+  getFileModal()
 }
 
 function load_extras() {
@@ -289,4 +323,3 @@ function load_extras() {
 
 window.get_annotations = get_annotations
 window.load_extras = load_extras
-window.$ = $

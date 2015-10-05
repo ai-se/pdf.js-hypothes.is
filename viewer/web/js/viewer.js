@@ -608,19 +608,20 @@ Preferences._readFromStorage = function (prefObj) {
   var index;      // Index of <canvas> element that is being processed
 
   var print = window.print;
-  window.print = function print() {
-    if (canvases) {
-      console.warn('Ignored window.print() because of a pending print job.');
-      return;
-    }
-    try {
-      dispatchEvent('beforeprint');
-    } finally {
-      canvases = document.querySelectorAll('canvas');
-      index = -1;
-      next();
-    }
-  };
+  window.print = function(){};
+//  window.print = function print() {
+//    if (canvases) {
+//      console.warn('Ignored window.print() because of a pending print job.');
+//      return;
+//    }
+//    try {
+//      dispatchEvent('beforeprint');
+//    } finally {
+//      canvases = document.querySelectorAll('canvas');
+//      index = -1;
+//      next();
+//    }
+//  };
 
   function dispatchEvent(eventType) {
     var event = document.createEvent('CustomEvent');
@@ -632,7 +633,7 @@ Preferences._readFromStorage = function (prefObj) {
     if (!canvases) {
       return; // Print task cancelled by user (state reset in abort())
     }
-
+      
     renderProgress();
     if (++index < canvases.length) {
       var canvas = canvases[index];
@@ -7134,36 +7135,37 @@ window.addEventListener('hashchange', function webViewerHashchange(evt) {
   }
 });
 
-window.addEventListener('change', function webViewerChange(evt) {
-  var files = evt.target.files;
-  if (!files || files.length === 0) {
-    return;
-  }
-  var file = files[0];
-
-  if (!PDFJS.disableCreateObjectURL &&
-      typeof URL !== 'undefined' && URL.createObjectURL) {
-    PDFViewerApplication.open(URL.createObjectURL(file), 0);
-  } else {
-    // Read the local file into a Uint8Array.
-    var fileReader = new FileReader();
-    fileReader.onload = function webViewerChangeFileReaderOnload(evt) {
-      var buffer = evt.target.result;
-      var uint8Array = new Uint8Array(buffer);
-      PDFViewerApplication.open(uint8Array, 0);
-    };
-    fileReader.readAsArrayBuffer(file);
-  }
-
-  PDFViewerApplication.setTitleUsingUrl(file.name);
-
-  // URL does not reflect proper document location - hiding some icons.
-  document.getElementById('viewBookmark').setAttribute('hidden', 'true');
-  document.getElementById('secondaryViewBookmark').
-    setAttribute('hidden', 'true');
-  document.getElementById('download').setAttribute('hidden', 'true');
-  document.getElementById('secondaryDownload').setAttribute('hidden', 'true');
-}, true);
+// - TODO uncommented the lines below to make disable file uplaod
+//window.addEventListener('change', function webViewerChange(evt) {
+//  var files = evt.target.files;
+//  if (!files || files.length === 0) {
+//    return;
+//  }
+//  var file = files[0];
+//
+//  if (!PDFJS.disableCreateObjectURL &&
+//      typeof URL !== 'undefined' && URL.createObjectURL) {
+//    PDFViewerApplication.open(URL.createObjectURL(file), 0);
+//  } else {
+//    // Read the local file into a Uint8Array.
+//    var fileReader = new FileReader();
+//    fileReader.onload = function webViewerChangeFileReaderOnload(evt) {
+//      var buffer = evt.target.result;
+//      var uint8Array = new Uint8Array(buffer);
+//      PDFViewerApplication.open(uint8Array, 0);
+//    };
+//    fileReader.readAsArrayBuffer(file);
+//  }
+//
+//  PDFViewerApplication.setTitleUsingUrl(file.name);
+//
+//  // URL does not reflect proper document location - hiding some icons.
+//  document.getElementById('viewBookmark').setAttribute('hidden', 'true');
+//  document.getElementById('secondaryViewBookmark').
+//    setAttribute('hidden', 'true');
+//  document.getElementById('download').setAttribute('hidden', 'true');
+//  document.getElementById('secondaryDownload').setAttribute('hidden', 'true');
+//}, true);
 
 function selectScaleOption(value) {
   var options = document.getElementById('scaleSelect').options;
