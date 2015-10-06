@@ -273,7 +273,7 @@ function getFileModal() {
                 <div class="input-group">\
                   <span class="input-group-btn">\
                     <span class="btn btn-primary btn-file">\
-                      Browse <input type="file" id="file-select" name="files[]" class="file"/>\
+                      Browse <input type="file" id="fileSelect" name="files[]" class="file"/>\
                     </span>\
                   </span>\
                   <input type="text" id="fileName" class="form-control" readonly>\
@@ -289,7 +289,7 @@ function getFileModal() {
     </div>\
   ';
   $('body').append(fileModal);
-  $(document).on('change', '#file-select', function(e) {
+  $(document).on('change', '#fileSelect', function(e) {
     print(e);
     e.preventDefault();
     e.stopPropagation();
@@ -298,8 +298,32 @@ function getFileModal() {
     $("#fileName").val(file_name);
   });
   $("#fileForm").submit(function(e){
-    alert("Hello World");
-    e.preventDefault()
+      e.preventDefault();
+      file = $("#fileSelect")[0].files[0];
+      if (file && file.type=="application/pdf") {
+        send_file(file);
+      }
+  });
+}
+
+function send_file(file) {
+  var data = new FormData();
+  data.append("file", file);
+  $.ajax({
+    type: "POST",
+    url: "http://localhost:5000/upload",
+    data: data,
+    timeout: 50000,
+    processData: false,
+    crossDomain: true,
+    contentType: false,
+    jsonp: false,
+    success: function(data, textStatus, jqXHR) {
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.error(textStatus)
+    }
   });
 }
 
