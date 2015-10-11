@@ -53,3 +53,4 @@ crashlytics-build.properties
 
 server/config.py
 files/*
+viewer/web/js/config.js

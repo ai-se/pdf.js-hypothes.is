@@ -149,7 +149,7 @@ function send_file(file) {
   data.append("authors", $("#authors").val());
   $.ajax({
     type: "POST",
-    url: "http://localhost:5000/upload",
+    url: SERVER + "upload",
     data: data,
     timeout: 50000,
     processData: false,
