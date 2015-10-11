@@ -7,6 +7,7 @@ from werkzeug import secure_filename
 def upload_file(file_data):
   file_obj = file_data['file']
   file_path = save_file(file_obj)
+  print(file_path)
   if not file_path:
     print("Print File already exists")
     # TODO handle exception here
