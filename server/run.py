@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS, cross_origin
 from utils.lib import *
 from api.file_manager import *
-from config import ORIGIN
+from config import ORIGIN, MODE
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -46,4 +46,7 @@ def upload():
     '''
 
 if __name__ == "__main__":
-  app.run()
+  if MODE == "prod":
+    app.run(host='0.0.0.0')
+  else:
+    app.run()
