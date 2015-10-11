@@ -1,0 +1,46 @@
+<div id="uploadModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Upload File</h4>
+      </div>
+      <div class="modal-body">
+        <form id="fileForm" class="form-horizontal" action="#" method="POST">
+          <div class="form-group">
+              <label for="title" class="col-sm-2 control-label">Title</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" placeholder="Paper Title" required>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="authors" class="col-sm-2 control-label">Author(s)</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="authors" placeholder="Author(s), Seperate by (,)" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="desc" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="3" id="desc"> </textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group col-sm-offset-1">
+              <span class="input-group-btn">
+                <span class="btn btn-primary btn-file">
+                  Browse <input type="file" id="fileSelect" name="files[]" class="file"/>
+                </span>
+              </span>
+              <input type="text" id="fileName" class="form-control" readonly>
+            </div>
+          </div>
+          <div class="form-group text-right">
+            <button class="btn btn-primary" type="submit" id="uploadButton">Upload</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

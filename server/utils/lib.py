@@ -1,6 +1,27 @@
+from __future__ import division, print_function
+import sys, os
+sys.path.append(os.path.abspath("."))
 from datetime import timedelta
 from flask import make_response, request, current_app
 from functools import update_wrapper
+
+class O():
+  """
+  Default class which everything extends.
+  """
+  def __init__(self, **d): self.has().update(**d)
+  def has(self): return self.__dict__
+  def update(self, **d) : self.has().update(d); return self
+  def __repr__(self)   :
+    show=[':%s %s' % (k,self.has()[k])
+      for k in sorted(self.has().keys() )
+      if k[0] is not "_"]
+    txt = ' '.join(show)
+    if len(txt) > 60:
+      show=map(lambda x: '\t'+x+'\n',show)
+    return '{'+' '.join(show)+'}'
+  def __getitem__(self, item):
+    return self.has().get(item)
 
 
 def crossdomain(origin=None, methods=None, headers=None,

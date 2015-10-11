@@ -2052,3 +2052,11 @@ Additional styles added by @bigfatnoob
     cursor: inherit;
     display: block;
 }
+
+#fileName {
+  width: 97%;
+}
+
+#uploadButton {
+  margin-right: 15px;
+}
