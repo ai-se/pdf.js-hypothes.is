@@ -1,6 +1,7 @@
 from __future__ import print_function, division
 import time, traceback
 import elasticsearch
+import json
 __author__ = 'george'
 
 es = elasticsearch.Elasticsearch()
@@ -20,7 +21,7 @@ def get_files():
   try:
     docs = es.search(index=INDEX, doc_type=FILE_TYPE, body={"query": {"match_all": {}}})
     rets = [doc['_source'] for doc in docs['hits']['hits']]
-    print(rets)
+    return json.dumps(rets)
   except Exception:
     pass
 

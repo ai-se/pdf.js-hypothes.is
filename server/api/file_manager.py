@@ -33,3 +33,6 @@ def save_file(file_obj):
   except Exception:
     print(traceback.format_exc())
   return None
+
+def load_all():
+  return get_files()

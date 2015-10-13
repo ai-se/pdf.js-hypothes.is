@@ -1,7 +1,9 @@
+from __future__ import print_function, division
+import traceback
 from flask import Flask
 from flask_cors import CORS, cross_origin
 from utils.lib import *
-from api.file_manager import *
+import api.file_manager as file_manager
 from config import ORIGIN, MODE
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
@@ -33,7 +35,7 @@ def upload():
       authors = authors,
       desc = desc
     ).has()
-    upload_file(file_data)
+    file_manager.upload_file(file_data)
     return "Done"
   return '''
     <!doctype html>
@@ -44,6 +46,12 @@ def upload():
          <input type=submit value=Upload>
     </form>
     '''
+@app.route("/all", methods=['GET'])
+@cross_origin(origin=ORIGIN)
+def load_all():
+  files = file_manager.get_files()
+  return str(files)
+
 
 if __name__ == "__main__":
   if MODE == "prod":

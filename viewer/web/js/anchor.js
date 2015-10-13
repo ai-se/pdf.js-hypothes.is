@@ -157,12 +157,21 @@ function send_file(file) {
     contentType: false,
     jsonp: false,
     success: function(data, textStatus, jqXHR) {
-      console.log(data);
+      clear_upload();
+      $("#uploadModal").modal('hide');
     },
     error: function(jqXHR, textStatus, errorThrown) {
-      console.error(textStatus)
+      console.error(textStatus);
     }
   });
+}
+
+function clear_upload() {
+  $("#title").val("");
+  $("#authors").val("");
+  $("#desc").val("");
+  $("#fileSelect").replaceWith($("#fileSelect").clone());
+  $("#fileName").val("");
 }
 
 function create_modal() {
