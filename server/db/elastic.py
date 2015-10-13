@@ -31,5 +31,4 @@ def _setup():
   es.indices.create(index=INDEX)
 
 if __name__ == "__main__":
-  #_setup()
-  get_files()
+  _setup()
