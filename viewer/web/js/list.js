@@ -1,17 +1,26 @@
 $(document).ready(function() {
-  load_all();
+  load_files();
 });
 
-function load_all() {
+$('#searchFrm').submit(function(e) {
+  e.preventDefault();
+  search();
+});
+
+function load_files(query) {
   $.ajax({
     type: "GET",
-    url: SERVER + "all",
+    url: SERVER + "search",
+    data : {query: query},
     timeout: 50000,
     success: function(data, textStatus, jqXHR) {
-      console.log(data);
       data = JSON.parse(data);
-      if (data && data.length)
+      clearTiles();
+      if (data && data.length) {
         makeTiles(data);
+      } else {
+        noDataFound();
+      }
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.error(textStatus);
@@ -19,9 +28,13 @@ function load_all() {
   });
 }
 
+function search() {
+  query = $("#searchTxt").val();
+  if (query)
+    load_files(query);
+}
 
 function makeTiles(files){
-  console.log(files[0]);
   files.forEach(function(file){
     makeTile(file);
   });
@@ -41,5 +54,13 @@ function makeTile(fileObj) {
   if (fileObj.desc) {
     wrapper.append("<div class='desc-wrpr'><label class='desc-lbl'>Description: </label> "+fileObj.desc+"</div>");
   }
-  wrapper.appendTo($(".container"));
+  wrapper.appendTo($(".results"));
+}
+
+function clearTiles() {
+  $(".results").html("");
+}
+
+function noDataFound() {
+  $(".results").append("<div class='no-data'>Oops No Data found for that query !!</div>")
 }

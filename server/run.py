@@ -46,12 +46,13 @@ def upload():
          <input type=submit value=Upload>
     </form>
     '''
-@app.route("/all", methods=['GET'])
-@cross_origin(origin=ORIGIN)
-def load_all():
-  files = file_manager.get_files()
-  return str(files)
 
+@app.route("/search", methods=['GET'])
+@cross_origin(origin=ORIGIN)
+def load_files():
+  query = request.args.get("query")
+  files = file_manager.load_files(query=query)
+  return str(files)
 
 if __name__ == "__main__":
   if MODE == "prod":

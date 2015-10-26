@@ -1,5 +1,6 @@
 from __future__ import print_function, division
-import traceback, os
+import traceback, os,sys
+sys.path.append(os.path.abspath("."))
 __author__ = 'george'
 from config import PDF_FOLDER
 from werkzeug import secure_filename
@@ -34,5 +35,20 @@ def save_file(file_obj):
     print(traceback.format_exc())
   return None
 
-def load_all():
-  return get_files()
+def load_files(query=None):
+  if not query:
+    return get_files()
+  else:
+    query_body = {
+      "query" : {
+        "bool" : {
+          "should" : [
+            {"match" : {"title": query}},
+            {"match" : {"desc": query}},
+            {"match" : {"authors": query}}
+          ],
+          "minimum_should_match": 1
+        }
+      }
+    }
+    return search(FILE_TYPE, query_body)

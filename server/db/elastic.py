@@ -18,14 +18,14 @@ def insert_file(file_data):
     # TODO throw exception
 
 def get_files():
-  try:
-    docs = es.search(index=INDEX, doc_type=FILE_TYPE, body={"query": {"match_all": {}}})
-    rets = [doc['_source'] for doc in docs['hits']['hits']]
-    return json.dumps(rets)
-  except Exception:
-    pass
+  docs = es.search(index=INDEX, doc_type=FILE_TYPE, body={"query": {"match_all": {}}})
+  rets = [doc['_source'] for doc in docs['hits']['hits']]
+  return json.dumps(rets)
 
-
+def search(type, query):
+  docs = es.search(index=INDEX, doc_type=type, body=query)
+  rets = [doc['_source'] for doc in docs['hits']['hits']]
+  return json.dumps(rets)
 
 def _setup():
   es.indices.create(index=INDEX)

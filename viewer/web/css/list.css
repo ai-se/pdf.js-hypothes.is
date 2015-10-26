@@ -8,3 +8,10 @@
   padding: 5px 10px;
   border-radius: 5px;
 }
+
+.no-data {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #666;
+}
