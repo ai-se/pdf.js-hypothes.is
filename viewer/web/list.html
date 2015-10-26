@@ -23,14 +23,25 @@ http://sourceforge.net/adobe/cmap/wiki/License/
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="google" content="notranslate">
     <title>WRITERED</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">  
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" /> 
+    <link rel="stylesheet" href="css/list.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="js/config.js"></script>
   </head>
   <body>
     <div class="container">
-      <h1>COMING SOON </h1>
+      <div class="navbar navbar-default"> 
+        <div class="navbar-header"> 
+          <a class="navbar-brand" href="#">WriteRed</a>
+        </div>
+      </div>
+      <form id="searchFrm" class="center-block">
+        <div class="form-group">
+          <input type="text" class="search-txt" id="searchTxt" placeholder="Search Title, Author or Description" tabindex="1" autofocus class="form-control"/>
+          <input type="submit" tabindex="2" class="btn btn-primary search-btn" value = "Search"/>
+        </div>
+      </form>
     </div>
   </body>
   <script type="application/javascript" src="js/list.js"></script>

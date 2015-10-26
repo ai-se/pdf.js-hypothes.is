@@ -8,6 +8,7 @@ function load_all() {
     url: SERVER + "all",
     timeout: 50000,
     success: function(data, textStatus, jqXHR) {
+      console.log(data);
       data = JSON.parse(data);
       if (data && data.length)
         makeTiles(data);
@@ -35,7 +36,10 @@ BASE_PATH=BASE_PAGE+"?file="
 function makeTile(fileObj) {
   var wrapper=$('<div/>')
           .addClass("wrapper")
-          .append("<a target='_blank' href="+BASE_PATH+escape_slash("/"+fileObj.file_path)+">"+fileObj.title+"</a>")
-          .append("<div class='authors'>"+fileObj.authors.toString()+"</div>")
-          .appendTo($(".container"));
+          .append("<label class='lbl-title'>Title: </label> <a target='_blank' href="+BASE_PATH+escape_slash("/"+fileObj.file_path)+">"+fileObj.title+"</a>")
+          .append("<div class='author-wrpr'><label class='author-lbl'>Authors: </label> "+fileObj.authors.toString()+"</div>");
+  if (fileObj.desc) {
+    wrapper.append("<div class='desc-wrpr'><label class='desc-lbl'>Description: </label> "+fileObj.desc+"</div>");
+  }
+  wrapper.appendTo($(".container"));
 }

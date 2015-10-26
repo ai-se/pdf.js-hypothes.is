@@ -66,7 +66,7 @@ function add_legend() {
             .attr("name", "show-legend")
             .attr("data-toggle", "modal")
             .attr("data-target", "#legendModal")
-            .addClass("h-icon-format-list-numbered");
+            .addClass("annotator-frame-button h-icon-format-list-numbered");
   var li = $("<li/>");
   li.append(legend);
   ann_bar.find("ul").append(li);
@@ -79,7 +79,7 @@ function add_share() {
             .attr("name", "show-share")
             .attr("data-toggle", "modal")
             .attr("data-target", "#shareModal")
-            .addClass("h-icon-share");
+            .addClass("annotator-frame-button h-icon-share");
   var li = $("<li/>");
   li.append(share);
   ann_bar.find("ul").append(li);  
@@ -92,7 +92,7 @@ function add_upload() {
             .attr("name", "show-upload")
             .attr("data-toggle", "modal")
             .attr("data-target", "#uploadModal")
-            .addClass("fa fa-cloud-upload");
+            .addClass("annotator-frame-button fa fa-cloud-upload");
   var li = $("<li/>");
   li.append(file_upload);
   ann_bar.find("ul").append(li); 
@@ -106,7 +106,7 @@ function loadModal(modal, callback) {
 }
 
 function getLegendModal() {
-  loadModal("modals/legend.html")
+  loadModal("modals/legend.html");
 }
 
 function getShareModal() {
@@ -147,6 +147,7 @@ function send_file(file) {
   data.append("file", file);
   data.append("title", $("#title").val());
   data.append("authors", $("#authors").val());
+  data.append("desc", $("#desc").val());
   $.ajax({
     type: "POST",
     url: SERVER + "upload",
