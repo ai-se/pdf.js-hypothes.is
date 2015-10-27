@@ -1,4 +1,10 @@
 $(document).ready(function() {
+  getFileModal();
+  $("#toggleUpload").off("click").on("click", function(e){
+    e.preventDefault();
+    toggleUpload();
+    return false;
+  });
   load_files();
 });
 
@@ -63,4 +69,8 @@ function clearTiles() {
 
 function noDataFound() {
   $(".results").append("<div class='no-data'>Oops No Data found for that query !!</div>")
+}
+
+function toggleUpload(){
+  $("#uploadModal").modal("toggle");
 }
