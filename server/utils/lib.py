@@ -64,3 +64,13 @@ def crossdomain(origin=None, methods=None, headers=None,
         f.provide_automatic_options = False
         return update_wrapper(wrapped_function, f)
     return decorator
+
+def decode(obj):
+  if isinstance(obj, dict):
+    return {decode(key):decode(value) for key,value in obj.iteritems()}
+  elif isinstance(obj, list):
+    return [decode(element) for element in obj]
+  elif isinstance(obj, unicode):
+    return obj.encode('utf-8')
+  else:
+    return obj
