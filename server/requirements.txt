@@ -1,3 +1,4 @@
 flask<=0.10.1
 flask-cors<=2.1.0
 elasticsearch>=1.0.0,<2.0.0
+requests<=2.8.1
