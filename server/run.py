@@ -54,6 +54,22 @@ def load_files():
   files = file_manager.load_files(query=query)
   return str(files)
 
+@app.route("/getfile", methods=['GET'])
+@cross_origin(origin=ORIGIN)
+def get_file():
+  file_path=request.args.get("file_path")
+  return str(file_manager.get_file(file_path))
+
+@app.route("/tags", methods=['POST'])
+@cross_origin(origin=ORIGIN)
+def update_tags():
+  try:
+    file_id = request.form.get("fileId", None)
+    file_manager.update_artifacts(file_id)
+    return str(file_id)
+  except Exception:
+    print(traceback.format_exc())
+
 if __name__ == "__main__":
   if MODE == "prod":
     app.run(host='0.0.0.0')

@@ -36,10 +36,19 @@ class Git:
       'body' : body
     }
     r = requests.post(url, data=json.dumps(data), headers = Git.get_auth_header())
-    print(r)
-    print("*****************")
-    print(r.text)
-    print("*****************")
-    print(r.status_code)
+    issue_id = json.loads(r.text)["number"]
+    return issue_id
 
+  @staticmethod
+  def update_issue(issue_id, title, body):
+    url = 'https://api.github.com/repos/%s/%s/issues/%s' % (OWNER, REPO, issue_id)
+    data = {
+      'title' : title,
+      'body' : body
+    }
+    r = requests.patch(url, data=json.dumps(data), headers = Git.get_auth_header())
+    issue_id = json.loads(r.text)["number"]
+    return issue_id
 
+if __name__ == "__main__":
+  Git.create_issue("Dummy", "dummy")

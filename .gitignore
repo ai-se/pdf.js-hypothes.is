@@ -56,4 +56,4 @@ files/*
 viewer/web/js/config.js
 server/build/*
 build/*
-
+files/*

@@ -6,6 +6,7 @@ from utils.lib import *
 from config import BASE_URI
 import urllib2, json, yaml
 from utils.git import Git
+from time import sleep
 
 HYPOTHESIS_API = "https://hypothes.is/api/search"
 
@@ -48,24 +49,24 @@ def parse(tags):
   return artifacts
 
 
-def save(name, path):
+def save(name, path, existing_issues):
   tags = fetch(path)
   artifacts = parse(tags)
+  issues = {}
   for key, values in artifacts.items():
     title, body = create_issue(name, key, values)
-    Git.create_issue(title, body)
+    if key in existing_issues:
+      issues[key] = Git.update_issue(existing_issues[key], title, body)
+    else:
+      issues[key] = Git.create_issue(title, body)
+    sleep(0.34)
+  return issues
 
 
 def create_issue(paper, artifact, values):
   title = artifact + " - " + paper
-  body = "\n".join(values)
+  sep = """
+
+  """
+  body = sep.join(values)
   return title, body
-
-def run():
-  tags = fetch("/files/cocreport.pdf")
-  artifacts = parse(tags)
-  print(artifacts)
-
-
-if __name__ == "__main__":
-  save("Negative Results for Software Effort Estimation", "/files/cocreport.pdf")

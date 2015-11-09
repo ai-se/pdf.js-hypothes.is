@@ -57,3 +57,29 @@ function clear_upload() {
   $("#fileSelect").replaceWith($("#fileSelect").clone());
   $("#fileName").val("");
 }
+
+function queryParameters () {
+  var result = {};
+  var params = window.location.search.split(/\?|\&/);
+  params.forEach( function(it) {
+    if (it) {
+      var param = it.split("=");
+      result[param[0]] = decodeURIComponent(param[1]);
+    }
+  });
+  return result;
+}
+
+function updateTags(fileId) {
+  $.ajax({
+    type: "POST",
+    url: SERVER + "tags",
+    data: {fileId: fileId},
+    success: function(data, textStatus, jqXHR) {
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.error(textStatus);
+    }
+  });
+}

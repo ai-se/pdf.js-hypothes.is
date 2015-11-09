@@ -15,7 +15,6 @@ get_annotations();
 </script>
 */
 
-
 function attach_annotation(tag, text, exact, prefix) {
 	var TextQuoteAnchor = require ('dom-anchor-text-quote')
 	var XPathRange = require('xpath-range')			       
@@ -59,7 +58,7 @@ function attach_annotations(data) {
 	}
 }
 
-function add_legend() {
+function addLegend() {
   var ann_bar = $(".annotator-toolbar");
   var legend = $("<button/>")
             .attr("title", "Legend")
@@ -72,7 +71,7 @@ function add_legend() {
   ann_bar.find("ul").append(li);
 }
 
-function add_share() {
+function addShare() {
   var ann_bar = $(".annotator-toolbar");
   var share = $("<button/>")
             .attr("title", "share")
@@ -85,7 +84,7 @@ function add_share() {
   ann_bar.find("ul").append(li);  
 }
 
-function add_upload() {
+function addUpload() {
   var ann_bar = $(".annotator-toolbar");
   var file_upload = $("<button/>")
             .attr("title", "upload")
@@ -96,6 +95,21 @@ function add_upload() {
   var li = $("<li/>");
   li.append(file_upload);
   ann_bar.find("ul").append(li); 
+}
+
+function addUpdateTags() {
+  var ann_bar = $(".annotator-toolbar");
+  var file_upload = $("<button/>")
+            .attr("id", "updateTags")
+            .attr("title", "Update Tags on Github")
+            .attr("name", "update-tags")  
+            .addClass("annotator-frame-button fa fa-github");
+  var li = $("<li/>");
+  li.append(file_upload);
+  ann_bar.find("ul").append(li); 
+  $("#updateTags").click(function(){ 
+    updateTags($("#fid").val())
+  });
 }
 
 function getLegendModal() {
@@ -114,7 +128,22 @@ function getShareModal() {
   loadModal("modals/share.html", callback);
 }
 
-function create_modal() {
+function fetchFile() {
+  filepath = queryParameters()["file"].substring(1);
+  $.ajax({
+    type: "GET",
+    url: SERVER + "getfile",
+    data:{"file_path": filepath},
+    success: function(data, textStatus, jqXHR) {
+      $("#fid").val(JSON.parse(data)["id"]);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.error(textStatus);
+    }
+  });
+}
+
+function createModal() {
   // Legend Modal and its functions
   getLegendModal()
   
@@ -125,11 +154,15 @@ function create_modal() {
   getFileModal()
 }
 
+
+
 function load_extras() {
-  create_modal();
-  add_legend();
-  add_share();
-  add_upload();
+  fetchFile();
+  createModal();
+  addLegend();
+  addShare();
+  addUpload();
+  addUpdateTags();
 }
 
 window.get_annotations = get_annotations
