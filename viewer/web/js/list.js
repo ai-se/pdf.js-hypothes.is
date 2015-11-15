@@ -9,12 +9,12 @@ $(document).ready(function() {
   $('.update-tags').click(function(e) {
     alert($(this).attr('fileId'));
   });
+  $('#searchFrm').submit(function(e) {
+    search();
+    return false;
+  });
 });
 
-$('#searchFrm').submit(function(e) {
-  e.preventDefault();
-  search();
-});
 
 function load_files(query) {
   $.ajax({
