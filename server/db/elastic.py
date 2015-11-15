@@ -71,7 +71,7 @@ def _setup():
     }})
 
 def _delete():
-  es.indices.delete(index=INDEX, doc_type = FILE_TYPE, id = "AVDpjcQQGW14IOIuxa1y")
+  es.indices.delete(index=INDEX)
 
 def _test():
   docs = es.search(index=INDEX, doc_type=FILE_TYPE, body={"query": {"term":{"file_path": "files/HW3.pdf"}}})
