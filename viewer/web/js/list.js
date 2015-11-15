@@ -6,6 +6,9 @@ $(document).ready(function() {
     return false;
   });
   load_files();
+  $('.update-tags').click(function(e) {
+    alert($(this).attr('fileId'));
+  });
 });
 
 $('#searchFrm').submit(function(e) {
@@ -60,8 +63,18 @@ function makeTile(fileObj) {
   if (fileObj.desc) {
     wrapper.append("<div class='desc-wrpr'><label class='desc-lbl'>Description: </label> "+fileObj.desc+"</div>");
   }
+  var updateButton = "<button onclick='triggerTagUpdate(\""+fileObj.id+"\")' fileId='"+fileObj.id+"' class='btn btn-sm btn-primary update-tags'>Update Tags</button>";
+  wrapper.append("<div class='desc-wrpr'>"+updateButton+"</div>");
   wrapper.appendTo($(".results"));
 }
+
+function triggerTagUpdate(fid) {
+  $('.update-tags[fileId='+fid+']').attr("disabled", true);
+  updateTags(fid, function(){
+    $('.update-tags[fileId='+fid+']').attr("disabled", false);
+  });
+}
+
 
 function clearTiles() {
   $(".results").html("");

@@ -68,3 +68,8 @@ def update_artifacts(file_id):
 
 def get_file(file_path):
   return elastic.get_doc_from_path(file_path)
+
+if __name__ == "__main__":
+  files = json.loads(load_files("fixed HW"))
+  print(len(files))
+  print(files)

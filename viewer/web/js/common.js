@@ -70,16 +70,17 @@ function queryParameters () {
   return result;
 }
 
-function updateTags(fileId) {
+function updateTags(fileId, callback) {
   $.ajax({
     type: "POST",
     url: SERVER + "tags",
     data: {fileId: fileId},
     success: function(data, textStatus, jqXHR) {
-      console.log(data);
+      callback && callback();
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.error(textStatus);
+      callback && callback();
     }
   });
 }
