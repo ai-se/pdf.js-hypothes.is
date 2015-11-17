@@ -54,7 +54,7 @@ def save(name, path, existing_issues):
   artifacts = parse(tags)
   issues = {}
   for key, values in artifacts.items():
-    title, body = create_issue(name, key, values)
+    title, body = create_issue(name, key, values[::-1])
     if key in existing_issues:
       issues[key] = Git.update_issue(existing_issues[key], title, body)
     else:

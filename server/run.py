@@ -65,6 +65,7 @@ def get_file():
 def update_tags():
   try:
     file_id = request.form.get("fileId", None)
+    print(file_id)
     file_manager.update_artifacts(file_id)
     return str(file_id)
   except Exception:

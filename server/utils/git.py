@@ -37,6 +37,7 @@ class Git:
     }
     r = requests.post(url, data=json.dumps(data), headers = Git.get_auth_header())
     issue_id = json.loads(r.text)["number"]
+    print("Create : ", url, issue_id)
     return issue_id
 
   @staticmethod
@@ -48,6 +49,7 @@ class Git:
     }
     r = requests.patch(url, data=json.dumps(data), headers = Git.get_auth_header())
     issue_id = json.loads(r.text)["number"]
+    print("Update : ", url, issue_id)
     return issue_id
 
 if __name__ == "__main__":
