@@ -52,6 +52,7 @@ def parse(tags):
 def save(name, path, existing_issues):
   tags = fetch(path)
   artifacts = parse(tags)
+  print("Tags", tags)
   issues = {}
   for key, values in artifacts.items():
     title, body = create_issue(name, key, values[::-1])
