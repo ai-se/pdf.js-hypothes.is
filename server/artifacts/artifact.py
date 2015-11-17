@@ -34,6 +34,7 @@ ARTIFACTS = {
 
 def fetch(file_path):
   uri = HYPOTHESIS_API + "?uri=" + BASE_URI + file_path
+  print(uri)
   response = urllib2.urlopen(uri)
   data = response.read()
   json_data = yaml.safe_load(data)
