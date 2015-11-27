@@ -57,3 +57,5 @@ viewer/web/js/config.js
 server/build/*
 build/*
 files/*
+logs/*
+pids.txt
