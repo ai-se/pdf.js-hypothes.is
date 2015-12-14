@@ -70,17 +70,30 @@ function queryParameters () {
   return result;
 }
 
+
 function updateTags(fileId, callback) {
+  if (updateTags.updating){
+    return;
+  }
+  var r = window.confirm("Do you want to update the tags on GitHub?");
+  if (!r) {
+    return;
+  }
+  updateTags.updating = true;
   $.ajax({
     type: "POST",
     url: SERVER + "tags",
     data: {fileId: fileId},
     success: function(data, textStatus, jqXHR) {
+      updateTags.updating = false;
       callback && callback();
+      alert("Updated tags on GitHub");
     },
     error: function(jqXHR, textStatus, errorThrown) {
+      updateTags.updating = false;
       console.error(textStatus);
       callback && callback();
+      alert("Failed to update tags on GitHub");
     }
   });
 }
