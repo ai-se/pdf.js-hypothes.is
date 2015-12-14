@@ -6,13 +6,11 @@ $(document).ready(function() {
     return false;
   });
   load_files();
-  $('.update-tags').click(function(e) {
-    alert($(this).attr('fileId'));
-  });
   $('#searchFrm').submit(function(e) {
     search();
     return false;
   });
+  loadModal("modals/update_tags.html");
 });
 
 
@@ -69,10 +67,12 @@ function makeTile(fileObj) {
 }
 
 function triggerTagUpdate(fid) {
-  $('.update-tags[fileId='+fid+']').attr("disabled", true);
-  updateTags(fid, function(){
-    $('.update-tags[fileId='+fid+']').attr("disabled", false);
-  });
+  $("#fid").val(fid);
+  $('#confirmUpdateModal').modal('show');
+//  $('.update-tags[fileId='+fid+']').attr("disabled", true);
+//  updateTags(function(){
+//    $('.update-tags[fileId='+fid+']').attr("disabled", false);
+//  });
 }
 
 

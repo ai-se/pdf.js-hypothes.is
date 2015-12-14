@@ -71,14 +71,11 @@ function queryParameters () {
 }
 
 
-function updateTags(fileId, callback) {
+function updateTags(callback) {
   if (updateTags.updating){
     return;
   }
-  var r = window.confirm("Do you want to update the tags on GitHub?");
-  if (!r) {
-    return;
-  }
+  var fileId = $("#fid").val();
   updateTags.updating = true;
   $.ajax({
     type: "POST",
@@ -87,12 +84,14 @@ function updateTags(fileId, callback) {
     success: function(data, textStatus, jqXHR) {
       updateTags.updating = false;
       callback && callback();
+      $("#confirmUpdateModal").modal('hide');
       alert("Updated tags on GitHub");
     },
     error: function(jqXHR, textStatus, errorThrown) {
       updateTags.updating = false;
       console.error(textStatus);
       callback && callback();
+      $("#confirmUpdateModal").modal('hide');
       alert("Failed to update tags on GitHub");
     }
   });

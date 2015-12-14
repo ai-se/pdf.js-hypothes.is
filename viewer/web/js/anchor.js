@@ -98,18 +98,18 @@ function addUpload() {
 }
 
 function addUpdateTags() {
+  loadModal("modals/update_tags.html");
   var ann_bar = $(".annotator-toolbar");
   var file_upload = $("<button/>")
             .attr("id", "updateTags")
             .attr("title", "Update Tags on Github")
-            .attr("name", "update-tags")  
+            .attr("name", "update-tags")
+            .attr("data-toggle", "modal")
+            .attr("data-target", "#confirmUpdateModal")
             .addClass("annotator-frame-button fa fa-github");
   var li = $("<li/>");
   li.append(file_upload);
-  ann_bar.find("ul").append(li); 
-  $("#updateTags").click(function(){ 
-    updateTags($("#fid").val())
-  });
+  ann_bar.find("ul").append(li);
 }
 
 function getLegendModal() {
